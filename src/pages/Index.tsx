@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TimePeriod } from '@/types/dashboard';
 import { TimePeriodToggle } from '@/components/dashboard/TimePeriodToggle';
 import { MetricCard } from '@/components/dashboard/MetricCard';
@@ -17,10 +18,12 @@ import {
   mockBottlenecks,
   mockDeals,
 } from '@/data/mockData';
-import { Bot, Home, Landmark, Command } from 'lucide-react';
+import { Bot, Home, Landmark, Command, TrendingUp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export default function Index() {
   const [period, setPeriod] = useState<TimePeriod>('daily');
+  const navigate = useNavigate();
   
   const totalRevenue = mockBusinessMetrics.reduce((sum, m) => sum + m.revenue.current, 0);
   const totalPipeline = mockBusinessMetrics.reduce((sum, m) => sum + m.pipelineValue, 0);
@@ -113,6 +116,26 @@ export default function Index() {
           {/* Kingdom Allocation */}
           <KingdomAllocationCard allocation={mockKingdomAllocation} />
         </div>
+
+        {/* Investment Intelligence CTA */}
+        <section className="my-6">
+          <Button
+            variant="outline"
+            className="w-full h-14 justify-between border-border/50 hover:border-border bg-card"
+            onClick={() => navigate('/investments')}
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-ai to-tax">
+                <TrendingUp className="h-4 w-4 text-background" />
+              </div>
+              <div className="text-left">
+                <p className="text-sm font-medium">Investment Intelligence</p>
+                <p className="text-xs text-muted-foreground">Payout tracking · Portfolio analytics · Company directory</p>
+              </div>
+            </div>
+            <span className="text-xs text-muted-foreground">Open →</span>
+          </Button>
+        </section>
 
         {/* Footer Stats */}
         <footer className="mt-8 pt-6 border-t border-border/50">
