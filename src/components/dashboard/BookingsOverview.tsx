@@ -1,8 +1,10 @@
 import { Booking } from '@/types/dashboard';
 import { cn } from '@/lib/utils';
+import { BookingImporter } from './BookingImporter';
 
 interface BookingsOverviewProps {
   bookings: Booking[];
+  onRefresh?: () => void;
 }
 
 const sourceStyles = {
@@ -11,7 +13,7 @@ const sourceStyles = {
   vrbo: { label: 'VRBO', className: 'bg-warning/20 text-warning border-warning/30' },
 };
 
-export function BookingsOverview({ bookings }: BookingsOverviewProps) {
+export function BookingsOverview({ bookings, onRefresh }: BookingsOverviewProps) {
   const directRevenue = bookings.filter(b => b.source === 'direct').reduce((sum, b) => sum + b.revenue, 0);
   const platformRevenue = bookings.filter(b => b.source !== 'direct').reduce((sum, b) => sum + b.revenue, 0);
   const totalRevenue = directRevenue + platformRevenue;
@@ -25,7 +27,10 @@ export function BookingsOverview({ bookings }: BookingsOverviewProps) {
 
   return (
     <div className="rounded-lg bg-card border border-border/50 card-glow-retreats p-5 animate-slide-in">
-      <h2 className="text-sm font-semibold mb-4">Booking Sources</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-sm font-semibold">Booking Sources</h2>
+        <BookingImporter onImportComplete={() => onRefresh?.()} />
+      </div>
       
       <div className="mb-4">
         <div className="flex justify-between text-xs text-muted-foreground mb-2">
