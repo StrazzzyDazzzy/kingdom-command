@@ -14,7 +14,159 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bookings: {
+        Row: {
+          check_in: string
+          check_out: string
+          cleaning_fee: number | null
+          created_at: string
+          guest_name: string | null
+          id: string
+          imported_from: string | null
+          net_revenue: number | null
+          nights: number | null
+          notes: string | null
+          platform_fee: number | null
+          property_name: string
+          revenue: number
+          source: string
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          check_in: string
+          check_out: string
+          cleaning_fee?: number | null
+          created_at?: string
+          guest_name?: string | null
+          id?: string
+          imported_from?: string | null
+          net_revenue?: number | null
+          nights?: number | null
+          notes?: string | null
+          platform_fee?: number | null
+          property_name: string
+          revenue?: number
+          source: string
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          check_in?: string
+          check_out?: string
+          cleaning_fee?: number | null
+          created_at?: string
+          guest_name?: string | null
+          id?: string
+          imported_from?: string | null
+          net_revenue?: number | null
+          nights?: number | null
+          notes?: string | null
+          platform_fee?: number | null
+          property_name?: string
+          revenue?: number
+          source?: string
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      hubspot_deals: {
+        Row: {
+          amount: number | null
+          close_date: string | null
+          company_name: string | null
+          created_date: string | null
+          days_in_stage: number | null
+          deal_name: string
+          hubspot_deal_id: string
+          id: string
+          last_modified: string | null
+          owner_name: string | null
+          pipeline: string | null
+          properties: Json | null
+          stage: string | null
+          synced_at: string
+        }
+        Insert: {
+          amount?: number | null
+          close_date?: string | null
+          company_name?: string | null
+          created_date?: string | null
+          days_in_stage?: number | null
+          deal_name: string
+          hubspot_deal_id: string
+          id?: string
+          last_modified?: string | null
+          owner_name?: string | null
+          pipeline?: string | null
+          properties?: Json | null
+          stage?: string | null
+          synced_at?: string
+        }
+        Update: {
+          amount?: number | null
+          close_date?: string | null
+          company_name?: string | null
+          created_date?: string | null
+          days_in_stage?: number | null
+          deal_name?: string
+          hubspot_deal_id?: string
+          id?: string
+          last_modified?: string | null
+          owner_name?: string | null
+          pipeline?: string | null
+          properties?: Json | null
+          stage?: string | null
+          synced_at?: string
+        }
+        Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: number
+          business_unit: string | null
+          created_at: string
+          currency: string | null
+          customer_email: string | null
+          customer_name: string | null
+          description: string | null
+          external_id: string | null
+          id: string
+          metadata: Json | null
+          payment_date: string
+          source: string
+        }
+        Insert: {
+          amount: number
+          business_unit?: string | null
+          created_at?: string
+          currency?: string | null
+          customer_email?: string | null
+          customer_name?: string | null
+          description?: string | null
+          external_id?: string | null
+          id?: string
+          metadata?: Json | null
+          payment_date?: string
+          source?: string
+        }
+        Update: {
+          amount?: number
+          business_unit?: string | null
+          created_at?: string
+          currency?: string | null
+          customer_email?: string | null
+          customer_name?: string | null
+          description?: string | null
+          external_id?: string | null
+          id?: string
+          metadata?: Json | null
+          payment_date?: string
+          source?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
