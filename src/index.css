@@ -1,15 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  /* ── Feature 8: Smooth scrolling ── */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
   :root {
     --font-sans: 'Inter', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
-    /* Dark executive theme - primary mode */
+    /* Dark executive theme - primary / default mode */
     --background: 220 20% 6%;
     --foreground: 210 20% 92%;
 
@@ -40,6 +46,13 @@
 
     --radius: 0.5rem;
 
+    /* Surface for glassmorphism */
+    --surface: 220 18% 12%;
+    --surface-light: 220 15% 14%;
+    --surface-lighter: 220 12% 18%;
+    --gold-light: 43 80% 65%;
+    --gold-dark: 43 65% 40%;
+
     /* Business accent colors */
     --ai-agents: 188 90% 50%;
     --ai-agents-muted: 188 60% 25%;
@@ -47,6 +60,12 @@
     --retreats-muted: 38 60% 25%;
     --tax-capital: 158 64% 42%;
     --tax-capital-muted: 158 40% 22%;
+
+    /* Leep brand accents */
+    --gold: 45 93% 58%;
+    --gold-muted: 45 50% 30%;
+    --purple: 270 60% 55%;
+    --purple-muted: 270 40% 30%;
 
     /* Status colors */
     --success: 158 64% 42%;
@@ -66,6 +85,68 @@
     --sidebar-accent-foreground: 210 20% 92%;
     --sidebar-border: 220 15% 12%;
     --sidebar-ring: 188 90% 50%;
+  }
+
+  /* ── Feature 1: Light theme ── */
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 220 20% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 12%;
+
+    --primary: 220 20% 12%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 220 10% 93%;
+    --secondary-foreground: 220 15% 35%;
+
+    --muted: 220 10% 93%;
+    --muted-foreground: 215 12% 45%;
+
+    --accent: 220 10% 90%;
+    --accent-foreground: 220 20% 12%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 10% 87%;
+    --input: 220 10% 87%;
+    --ring: 270 60% 55%;
+
+    --surface: 220 10% 96%;
+
+    --gold: 45 85% 45%;
+    --gold-muted: 45 40% 88%;
+    --purple: 270 55% 50%;
+    --purple-muted: 270 30% 88%;
+
+    --ai-agents: 188 80% 38%;
+    --ai-agents-muted: 188 40% 88%;
+    --retreats: 38 80% 45%;
+    --retreats-muted: 38 40% 88%;
+    --tax-capital: 158 55% 35%;
+    --tax-capital-muted: 158 30% 88%;
+
+    --success: 158 55% 35%;
+    --warning: 38 80% 45%;
+    --critical: 0 72% 51%;
+
+    --metric-up: 158 55% 40%;
+    --metric-down: 0 72% 50%;
+    --metric-neutral: 215 12% 55%;
+
+    --sidebar-background: 0 0% 97%;
+    --sidebar-foreground: 220 15% 35%;
+    --sidebar-primary: 270 55% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 10% 93%;
+    --sidebar-accent-foreground: 220 20% 12%;
+    --sidebar-border: 220 10% 87%;
+    --sidebar-ring: 270 55% 50%;
   }
 
   .dark {
@@ -88,6 +169,7 @@
     --border: 220 15% 16%;
     --input: 220 15% 16%;
     --ring: 188 90% 50%;
+    --surface: 220 18% 12%;
     --sidebar-background: 220 20% 5%;
     --sidebar-foreground: 210 15% 75%;
     --sidebar-primary: 188 90% 50%;
@@ -106,11 +188,24 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-sans);
+    font-family: 'Inter', sans-serif;
   }
 
-  .font-mono {
-    font-family: var(--font-mono);
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* ── Feature 4: Global transition on interactive elements ── */
+  a,
+  button {
+    transition: transform 0.15s ease, color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /* ── Feature 9: Visible focus styles ── */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
@@ -157,5 +252,126 @@
 
   .status-success {
     @apply bg-[hsl(var(--success)/0.15)] text-[hsl(var(--success))] border border-[hsl(var(--success)/0.3)];
+  }
+
+  /* ── Feature 4: Micro-interaction utilities ── */
+  .btn-interactive {
+    @apply transition-transform duration-150 ease-out;
+  }
+  .btn-interactive:hover {
+    transform: scale(1.03);
+  }
+  .btn-interactive:active {
+    transform: scale(0.97);
+  }
+
+  /* ── Feature 5: Glassmorphism utilities ── */
+  .glass {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: hsl(var(--surface) / 0.6);
+    border: 1px solid hsl(var(--border) / 0.3);
+  }
+
+  .glass-strong {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    background: hsl(var(--surface) / 0.8);
+    border: 1px solid hsl(var(--border) / 0.4);
+  }
+
+  /* ── Feature 5: Noise overlay pseudo-element ── */
+  .noise-overlay {
+    position: relative;
+  }
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* ── Feature 4: Nav link underline animation ── */
+  .nav-link-underline {
+    position: relative;
+  }
+  .nav-link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: hsl(var(--gold));
+    transition: width 0.3s ease;
+  }
+  .nav-link-underline:hover::after {
+    width: 100%;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(43 80% 65%), hsl(43 72% 52%), hsl(43 65% 40%));
+  }
+
+  .text-gradient-purple {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(263 60% 65%), hsl(263 70% 50%));
+  }
+
+  .bg-gradient-hero {
+    background: radial-gradient(ellipse at 30% 20%, hsl(263 70% 50% / 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, hsl(43 72% 52% / 0.08) 0%, transparent 50%),
+                hsl(var(--background));
+  }
+
+  .bg-gradient-section {
+    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--card)) 50%, hsl(var(--background)) 100%);
+  }
+
+  .bg-gradient-card {
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--card) / 0.8) 100%);
+  }
+
+  .shadow-gold {
+    box-shadow: 0 0 30px hsl(var(--gold) / 0.15), 0 0 60px hsl(var(--gold) / 0.05);
+  }
+
+  .glow-pulse {
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+    width: max-content;
+  }
+}
+
+/* ── Feature 9: Respect reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
