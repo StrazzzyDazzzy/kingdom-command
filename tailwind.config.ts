@@ -16,6 +16,15 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
+        display: ['Playfair Display', 'Georgia', 'serif'],
+      },
+      fontSize: {
+        'display-lg': ['5rem', { lineHeight: '1.05', letterSpacing: '-0.03em' }],
+        'display-md': ['3.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+        'display-sm': ['2.5rem', { lineHeight: '1.15', letterSpacing: '-0.02em' }],
+        'heading-lg': ['2rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        'heading-md': ['1.5rem', { lineHeight: '1.3', letterSpacing: '-0.01em' }],
+        'body-lg': ['1.125rem', { lineHeight: '1.7' }],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -99,12 +108,33 @@ export default {
           from: { opacity: "0", transform: "translateY(4px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "float": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(15px, -20px) scale(1.05)" },
+          "66%": { transform: "translate(-10px, 10px) scale(0.95)" },
+        },
+        "hero-reveal": {
+          "0%": { opacity: "0", transform: "translateY(40px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "line-grow": {
+          "0%": { transform: "scaleX(0)" },
+          "100%": { transform: "scaleX(1)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "slide-in": "slide-in 0.3s ease-out",
+        "float": "float 8s ease-in-out infinite",
+        "hero-reveal": "hero-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "fade-in": "fade-in 1s ease-out forwards",
+        "line-grow": "line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards",
       },
     },
   },
