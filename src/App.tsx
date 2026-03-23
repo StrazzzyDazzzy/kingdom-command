@@ -15,7 +15,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/kingdom-command">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/dashboard" element={<Index />} />
