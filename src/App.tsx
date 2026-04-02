@@ -3,28 +3,45 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/lib/auth";
+import { ProtectedRoute } from "@/components/shared/ProtectedRoute";
 import Landing from "./pages/Landing";
 import Index from "./pages/Index";
 import Investments from "./pages/Investments";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Portal from "./pages/portal/Portal";
+import DealRoomPage from "./pages/portal/DealRoomPage";
+import InvestmentDetailPage from "./pages/portal/InvestmentDetailPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter basename="/kingdom-command">
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/dashboard" element={<Index />} />
-          <Route path="/investments" element={<Investments />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter basename="/kingdom-command">
+          <Routes>
+            {/* Public routes */}
+            <Route path="/" element={<Landing />} />
+            <Route path="/dashboard" element={<Index />} />
+            <Route path="/investments" element={<Investments />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            {/* Protected data room routes */}
+            <Route path="/portal" element={<ProtectedRoute><Portal /></ProtectedRoute>} />
+            <Route path="/portal/investments/:slug" element={<ProtectedRoute allowedRoles={['admin']}><InvestmentDetailPage /></ProtectedRoute>} />
+            <Route path="/portal/deal-room/:slug" element={<ProtectedRoute><DealRoomPage /></ProtectedRoute>} />
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 

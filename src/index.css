@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,97 +6,104 @@
 
 @layer base {
   :root {
-    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-sans: 'DM Sans', 'Inter', system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     --font-display: 'Playfair Display', Georgia, serif;
 
-    /* Dark executive theme - primary mode */
-    --background: 220 20% 6%;
-    --foreground: 210 20% 92%;
+    /* Kingdom Investors — Deep Navy Executive Theme */
+    --background: 216 52% 9%;        /* #0A1628 Deep Navy */
+    --foreground: 36 33% 94%;        /* #F4F1EC Off-white */
 
-    --card: 220 18% 9%;
-    --card-foreground: 210 20% 92%;
+    --card: 213 36% 18%;             /* #1E2D40 Slate */
+    --card-foreground: 36 33% 94%;
 
-    --popover: 220 18% 9%;
-    --popover-foreground: 210 20% 92%;
+    --popover: 213 36% 18%;
+    --popover-foreground: 36 33% 94%;
 
-    --primary: 210 20% 92%;
-    --primary-foreground: 220 20% 6%;
+    --primary: 42 52% 54%;           /* #C9A84C Warm Gold */
+    --primary-foreground: 216 52% 9%;
 
-    --secondary: 220 15% 14%;
-    --secondary-foreground: 210 15% 75%;
+    --secondary: 213 36% 18%;
+    --secondary-foreground: 36 33% 94%;
 
-    --muted: 220 15% 14%;
-    --muted-foreground: 215 12% 50%;
+    --muted: 213 30% 15%;
+    --muted-foreground: 210 16% 52%; /* #6B7B8D Muted text */
 
-    --accent: 220 15% 18%;
-    --accent-foreground: 210 20% 92%;
+    --accent: 168 48% 32%;           /* #2A7B6F Muted Teal */
+    --accent-foreground: 36 33% 94%;
 
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive: 348 50% 37%;      /* #8B2F3A Deep Red */
+    --destructive-foreground: 36 33% 94%;
 
-    --border: 220 15% 16%;
-    --input: 220 15% 16%;
-    --ring: 188 90% 50%;
+    --border: 213 30% 20%;
+    --input: 213 30% 20%;
+    --ring: 42 52% 54%;              /* Gold ring */
 
     --radius: 0.5rem;
 
-    /* Business accent colors */
-    --ai-agents: 188 90% 50%;
-    --ai-agents-muted: 188 60% 25%;
+    /* Kingdom Investors brand accents */
+    --ki-gold: 42 52% 54%;
+    --ki-gold-muted: 42 40% 30%;
+    --ki-teal: 168 48% 32%;
+    --ki-teal-muted: 168 35% 20%;
+    --ki-navy: 216 52% 9%;
+
+    /* Business accent colors (preserved for compatibility) */
+    --ai-agents: 42 52% 54%;
+    --ai-agents-muted: 42 40% 25%;
     --retreats: 38 92% 50%;
     --retreats-muted: 38 60% 25%;
-    --tax-capital: 158 64% 42%;
-    --tax-capital-muted: 158 40% 22%;
+    --tax-capital: 168 48% 32%;
+    --tax-capital-muted: 168 35% 20%;
 
     /* Status colors */
-    --success: 158 64% 42%;
-    --warning: 38 92% 50%;
-    --critical: 0 72% 51%;
+    --success: 168 48% 32%;
+    --warning: 42 52% 54%;
+    --critical: 348 50% 37%;
 
     /* Metric colors */
-    --metric-up: 158 64% 52%;
-    --metric-down: 0 72% 55%;
-    --metric-neutral: 215 12% 50%;
+    --metric-up: 168 48% 42%;
+    --metric-down: 348 50% 45%;
+    --metric-neutral: 210 16% 52%;
 
-    --sidebar-background: 220 20% 5%;
-    --sidebar-foreground: 210 15% 75%;
-    --sidebar-primary: 188 90% 50%;
-    --sidebar-primary-foreground: 220 20% 6%;
-    --sidebar-accent: 220 15% 12%;
-    --sidebar-accent-foreground: 210 20% 92%;
-    --sidebar-border: 220 15% 12%;
-    --sidebar-ring: 188 90% 50%;
+    --sidebar-background: 216 52% 7%;
+    --sidebar-foreground: 210 16% 68%;
+    --sidebar-primary: 42 52% 54%;
+    --sidebar-primary-foreground: 216 52% 9%;
+    --sidebar-accent: 213 36% 14%;
+    --sidebar-accent-foreground: 36 33% 94%;
+    --sidebar-border: 213 30% 15%;
+    --sidebar-ring: 42 52% 54%;
   }
 
   .dark {
-    --background: 220 20% 6%;
-    --foreground: 210 20% 92%;
-    --card: 220 18% 9%;
-    --card-foreground: 210 20% 92%;
-    --popover: 220 18% 9%;
-    --popover-foreground: 210 20% 92%;
-    --primary: 210 20% 92%;
-    --primary-foreground: 220 20% 6%;
-    --secondary: 220 15% 14%;
-    --secondary-foreground: 210 15% 75%;
-    --muted: 220 15% 14%;
-    --muted-foreground: 215 12% 50%;
-    --accent: 220 15% 18%;
-    --accent-foreground: 210 20% 92%;
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 220 15% 16%;
-    --input: 220 15% 16%;
-    --ring: 188 90% 50%;
-    --sidebar-background: 220 20% 5%;
-    --sidebar-foreground: 210 15% 75%;
-    --sidebar-primary: 188 90% 50%;
-    --sidebar-primary-foreground: 220 20% 6%;
-    --sidebar-accent: 220 15% 12%;
-    --sidebar-accent-foreground: 210 20% 92%;
-    --sidebar-border: 220 15% 12%;
-    --sidebar-ring: 188 90% 50%;
+    --background: 216 52% 9%;
+    --foreground: 36 33% 94%;
+    --card: 213 36% 18%;
+    --card-foreground: 36 33% 94%;
+    --popover: 213 36% 18%;
+    --popover-foreground: 36 33% 94%;
+    --primary: 42 52% 54%;
+    --primary-foreground: 216 52% 9%;
+    --secondary: 213 36% 18%;
+    --secondary-foreground: 36 33% 94%;
+    --muted: 213 30% 15%;
+    --muted-foreground: 210 16% 52%;
+    --accent: 168 48% 32%;
+    --accent-foreground: 36 33% 94%;
+    --destructive: 348 50% 37%;
+    --destructive-foreground: 36 33% 94%;
+    --border: 213 30% 20%;
+    --input: 213 30% 20%;
+    --ring: 42 52% 54%;
+    --sidebar-background: 216 52% 7%;
+    --sidebar-foreground: 210 16% 68%;
+    --sidebar-primary: 42 52% 54%;
+    --sidebar-primary-foreground: 216 52% 9%;
+    --sidebar-accent: 213 36% 14%;
+    --sidebar-accent-foreground: 36 33% 94%;
+    --sidebar-border: 213 30% 15%;
+    --sidebar-ring: 42 52% 54%;
   }
 }
 

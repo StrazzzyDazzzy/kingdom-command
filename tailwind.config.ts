@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['DM Sans', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
         display: ['Playfair Display', 'Georgia', 'serif'],
       },
@@ -85,6 +85,15 @@ export default {
         success: "hsl(var(--success))",
         warning: "hsl(var(--warning))",
         critical: "hsl(var(--critical))",
+        gold: {
+          DEFAULT: "hsl(var(--ki-gold))",
+          muted: "hsl(var(--ki-gold-muted))",
+        },
+        teal: {
+          DEFAULT: "hsl(var(--ki-teal))",
+          muted: "hsl(var(--ki-teal-muted))",
+        },
+        navy: "hsl(var(--ki-navy))",
       },
       borderRadius: {
         lg: "var(--radius)",
