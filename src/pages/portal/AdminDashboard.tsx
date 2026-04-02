@@ -22,6 +22,7 @@ import {
   ExternalLink,
   Loader2,
   Star,
+  Pencil,
 } from 'lucide-react';
 import { CATEGORY_LABELS, STATUS_LABELS } from '@/types/dataroom';
 import type { InvestmentCategory, InvestmentStatus } from '@/types/dataroom';
@@ -294,6 +295,11 @@ export default function AdminDashboard() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
+                  <Link to={`/portal/investments/${investment.slug}/edit`}>
+                    <Button variant="ghost" size="icon">
+                      <Pencil className="h-4 w-4" />
+                    </Button>
+                  </Link>
                   <Link to={`/portal/investments/${investment.slug}`}>
                     <Button variant="ghost" size="icon">
                       <ExternalLink className="h-4 w-4" />

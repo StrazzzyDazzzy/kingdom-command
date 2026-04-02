@@ -13,6 +13,7 @@ import Register from "./pages/Register";
 import Portal from "./pages/portal/Portal";
 import DealRoomPage from "./pages/portal/DealRoomPage";
 import InvestmentDetailPage from "./pages/portal/InvestmentDetailPage";
+import InvestmentEditPage from "./pages/portal/InvestmentEditPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
             {/* Protected data room routes */}
             <Route path="/portal" element={<ProtectedRoute><Portal /></ProtectedRoute>} />
             <Route path="/portal/investments/:slug" element={<ProtectedRoute allowedRoles={['admin']}><InvestmentDetailPage /></ProtectedRoute>} />
+            <Route path="/portal/investments/:slug/edit" element={<ProtectedRoute allowedRoles={['admin']}><InvestmentEditPage /></ProtectedRoute>} />
             <Route path="/portal/deal-room/:slug" element={<ProtectedRoute><DealRoomPage /></ProtectedRoute>} />
 
             <Route path="*" element={<NotFound />} />

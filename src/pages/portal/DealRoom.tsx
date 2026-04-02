@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
   useInvestment,
   useInvestmentDocuments,
@@ -34,6 +34,7 @@ import {
   XCircle,
   Send,
   Loader2,
+  Pencil,
 } from 'lucide-react';
 import { CATEGORY_LABELS, STATUS_LABELS, DOC_TYPE_LABELS } from '@/types/dataroom';
 
@@ -123,10 +124,20 @@ export default function DealRoom() {
             )}
           </div>
 
-          <Button className="shrink-0">
-            <Send className="mr-2 h-4 w-4" />
-            Send to CPA/Attorney
-          </Button>
+          <div className="flex gap-2 shrink-0">
+            {profile?.role === 'admin' && (
+              <Link to={`/portal/investments/${slug}/edit`}>
+                <Button variant="outline">
+                  <Pencil className="mr-2 h-4 w-4" />
+                  Edit
+                </Button>
+              </Link>
+            )}
+            <Button>
+              <Send className="mr-2 h-4 w-4" />
+              Send to CPA/Attorney
+            </Button>
+          </div>
         </div>
 
         {/* Key Metrics */}

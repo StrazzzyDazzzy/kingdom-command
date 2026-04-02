@@ -22,16 +22,18 @@
 - [x] Internal audit disclosure banner
 - [x] Tax strategy badge display (1031, QOZ, Cost Seg, 179D, Section 45)
 
+- [x] Admin investment edit form: full field editing (basic info, financial, tax flags, IRS codes, compliance)
+- [x] File upload system: drag-drop PDF upload to Supabase Storage with progress
+- [x] Document admin CRUD: upload, categorize by type, client/affiliate visibility toggles, delete
+- [x] Video embed admin CRUD: add YouTube/Vimeo/Loom/Wistia embeds, preview, affiliate visibility, delete
+- [x] Link management admin CRUD: add/delete links with type categorization, public toggle
+- [x] Audit record admin CRUD: add/delete audit records with year, type, outcome, success rate, firm
+- [x] Admin edit button on deal room page (admin-only) and dashboard listing
+
 ### Remaining Phase 1
-- [ ] Admin investment edit form (full field editing)
-- [ ] File upload system: drag-drop PDF upload to Supabase Storage
 - [ ] PDF text extraction on upload
 - [ ] PDF watermarking with client name
 - [ ] IRS codes admin management UI
-- [ ] Audit record admin CRUD
-- [ ] Document admin CRUD (upload, categorize, visibility controls)
-- [ ] Video embed admin CRUD
-- [ ] Link management admin UI
 - [ ] "Send to CPA/Attorney" packet generator (branded PDF)
 
 ## Phase 2: AI Intelligence Layer
