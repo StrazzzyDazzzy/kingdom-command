@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { extractTextFromPdf, saveExtractedText, estimatePageCount } from '@/lib/pdf/extract';
 import {
   useInvestment,
   useUpdateInvestment,
@@ -349,16 +350,36 @@ function DocumentManager({ investmentId, documents }: { investmentId: string; do
     if (!selectedFile) return;
     setUploading(true);
     try {
+      // Upload file to Supabase Storage
       const result = await uploadFile.mutateAsync({ file: selectedFile, investmentId });
-      await createDoc.mutateAsync({
+
+      // Estimate page count for PDFs
+      let pageCount: number | null = null;
+      if (selectedFile.name.toLowerCase().endsWith('.pdf')) {
+        pageCount = await estimatePageCount(selectedFile);
+      }
+
+      // Create document record
+      const docResult = await createDoc.mutateAsync({
         investment_id: investmentId,
         doc_type: docType,
         file_name: result.fileName,
         file_url: result.url,
         file_size: result.fileSize,
+        page_count: pageCount,
         is_client_visible: isClientVisible,
         is_affiliate_visible: isAffiliateVisible,
       });
+
+      // Extract text from PDFs in background (non-blocking)
+      if (selectedFile.name.toLowerCase().endsWith('.pdf') && docResult?.id) {
+        extractTextFromPdf(selectedFile).then(text => {
+          saveExtractedText(docResult.id, text).catch(() => {
+            // Text extraction is best-effort; don't block the UI
+          });
+        }).catch(() => {});
+      }
+
       setSelectedFile(null);
       setDialogOpen(false);
     } finally {

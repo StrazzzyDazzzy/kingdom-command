@@ -6,8 +6,11 @@ import {
   useInvestmentVideos,
   useInvestmentLinks,
   useInvestmentAudits,
+  useIrsCodes,
 } from '@/hooks/useInvestments';
 import { useAuth } from '@/lib/auth';
+import { openWatermarkedPdf } from '@/lib/pdf/watermark';
+import { generateAdvisorPacket } from '@/lib/pdf/packetGenerator';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -49,6 +52,7 @@ export default function DealRoom() {
   const { data: videos } = useInvestmentVideos(investment?.id ?? '');
   const { data: links } = useInvestmentLinks(investment?.id ?? '');
   const { data: audits } = useInvestmentAudits(investment?.id ?? '');
+  const { data: irsCodes } = useIrsCodes();
 
   if (isLoading) {
     return (
@@ -133,7 +137,17 @@ export default function DealRoom() {
                 </Button>
               </Link>
             )}
-            <Button>
+            <Button onClick={() => {
+              if (investment) {
+                generateAdvisorPacket({
+                  investment,
+                  documents: documents ?? [],
+                  audits: audits ?? [],
+                  irsCodes: irsCodes ?? [],
+                  clientName: profile?.full_name ?? 'Client',
+                });
+              }
+            }}>
               <Send className="mr-2 h-4 w-4" />
               Send to CPA/Attorney
             </Button>
@@ -310,12 +324,24 @@ export default function DealRoom() {
                         {doc.file_size && <span>{(doc.file_size / 1024 / 1024).toFixed(1)} MB</span>}
                       </div>
                     </div>
-                    <Button variant="outline" size="sm" asChild>
-                      <a href={doc.file_url} target="_blank" rel="noopener noreferrer">
-                        <Download className="mr-2 h-4 w-4" />
-                        Download
-                      </a>
-                    </Button>
+                    <div className="flex gap-1">
+                      {doc.file_name.toLowerCase().endsWith('.pdf') && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => openWatermarkedPdf(doc.file_url, profile?.full_name ?? 'Client')}
+                        >
+                          <ExternalLink className="mr-2 h-4 w-4" />
+                          View
+                        </Button>
+                      )}
+                      <Button variant="outline" size="sm" asChild>
+                        <a href={doc.file_url} target="_blank" rel="noopener noreferrer">
+                          <Download className="mr-2 h-4 w-4" />
+                          Download
+                        </a>
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               ))}

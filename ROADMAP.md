@@ -30,11 +30,12 @@
 - [x] Audit record admin CRUD: add/delete audit records with year, type, outcome, success rate, firm
 - [x] Admin edit button on deal room page (admin-only) and dashboard listing
 
-### Remaining Phase 1
-- [ ] PDF text extraction on upload
-- [ ] PDF watermarking with client name
-- [ ] IRS codes admin management UI
-- [ ] "Send to CPA/Attorney" packet generator (branded PDF)
+- [x] PDF text extraction: client-side PDF text extraction on upload with page count estimation
+- [x] PDF watermarking: client name + date watermark overlay on PDF viewing/printing
+- [x] IRS codes admin management UI: full CRUD with search, category filter, related investment types
+- [x] "Send to CPA/Attorney" packet generator: branded jsPDF packet with investment summary, IRS codes, audit history, document list, disclaimers
+
+### Phase 1 COMPLETE
 
 ## Phase 2: AI Intelligence Layer
 - [ ] PDF ingestion pipeline: upload → extract → chunk → embed with pgvector
