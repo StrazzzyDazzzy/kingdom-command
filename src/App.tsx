@@ -15,6 +15,7 @@ import DealRoomPage from "./pages/portal/DealRoomPage";
 import InvestmentDetailPage from "./pages/portal/InvestmentDetailPage";
 import InvestmentEditPage from "./pages/portal/InvestmentEditPage";
 import IrsCodesAdminPage from "./pages/portal/IrsCodesAdminPage";
+import ComparisonPage from "./pages/portal/ComparisonPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/portal/investments/:slug" element={<ProtectedRoute allowedRoles={['admin']}><InvestmentDetailPage /></ProtectedRoute>} />
             <Route path="/portal/investments/:slug/edit" element={<ProtectedRoute allowedRoles={['admin']}><InvestmentEditPage /></ProtectedRoute>} />
             <Route path="/portal/irs-codes" element={<ProtectedRoute allowedRoles={['admin']}><IrsCodesAdminPage /></ProtectedRoute>} />
+            <Route path="/portal/compare" element={<ProtectedRoute><ComparisonPage /></ProtectedRoute>} />
             <Route path="/portal/deal-room/:slug" element={<ProtectedRoute><DealRoomPage /></ProtectedRoute>} />
 
             <Route path="*" element={<NotFound />} />

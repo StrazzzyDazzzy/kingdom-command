@@ -47,6 +47,8 @@ import {
 } from 'lucide-react';
 import { CATEGORY_LABELS, STATUS_LABELS, DOC_TYPE_LABELS } from '@/types/dataroom';
 import type { InvestmentCategory, InvestmentStatus, DocType, Investment } from '@/types/dataroom';
+import { IrsAutoTagger } from '@/components/ai/IrsAutoTagger';
+import { MaterialParticipationDetector } from '@/components/ai/MaterialParticipationDetector';
 
 export default function InvestmentEdit() {
   const { slug } = useParams<{ slug: string }>();
@@ -162,6 +164,7 @@ export default function InvestmentEdit() {
           <TabsTrigger value="videos">Videos ({videos?.length ?? 0})</TabsTrigger>
           <TabsTrigger value="links">Links ({links?.length ?? 0})</TabsTrigger>
           <TabsTrigger value="audits">Audits ({audits?.length ?? 0})</TabsTrigger>
+          <TabsTrigger value="ai-tools">AI Tools</TabsTrigger>
         </TabsList>
 
         {/* ============================================ */}
@@ -322,6 +325,16 @@ export default function InvestmentEdit() {
         {/* ============================================ */}
         <TabsContent value="audits" className="space-y-4">
           <AuditManager investmentId={investment.id} audits={audits ?? []} />
+        </TabsContent>
+
+        {/* ============================================ */}
+        {/* AI TOOLS TAB */}
+        {/* ============================================ */}
+        <TabsContent value="ai-tools" className="space-y-4">
+          <div className="grid gap-4 lg:grid-cols-2">
+            <IrsAutoTagger investment={investment} documents={documents ?? []} />
+            <MaterialParticipationDetector investment={investment} documents={documents ?? []} />
+          </div>
         </TabsContent>
       </Tabs>
     </div>

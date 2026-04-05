@@ -18,6 +18,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Disclaimer } from '@/components/shared/Disclaimer';
 import { ScenarioCalculator } from '@/components/investments/ScenarioCalculator';
 import { DisclosureGate } from '@/components/investments/DisclosureGate';
+import { InvestmentChat } from '@/components/ai/InvestmentChat';
+import { NlScenarioGenerator } from '@/components/ai/NlScenarioGenerator';
 import {
   ArrowLeft,
   Building2,
@@ -255,6 +257,8 @@ export default function DealRoom() {
           <TabsTrigger value="videos">Videos</TabsTrigger>
           <TabsTrigger value="audits">Audit History</TabsTrigger>
           <TabsTrigger value="scenarios">Scenarios</TabsTrigger>
+          <TabsTrigger value="ai-chat">AI Q&A</TabsTrigger>
+          <TabsTrigger value="ai-scenario">AI Scenario</TabsTrigger>
         </TabsList>
 
         {/* Overview */}
@@ -429,6 +433,16 @@ export default function DealRoom() {
         {/* Scenario Calculator */}
         <TabsContent value="scenarios" className="space-y-4">
           <ScenarioCalculator investment={investment} />
+        </TabsContent>
+
+        {/* AI Chat */}
+        <TabsContent value="ai-chat" className="space-y-4">
+          <InvestmentChat investment={investment} documents={documents ?? []} />
+        </TabsContent>
+
+        {/* AI Scenario Generator */}
+        <TabsContent value="ai-scenario" className="space-y-4">
+          <NlScenarioGenerator investment={investment} />
         </TabsContent>
       </Tabs>
     </div>

@@ -13,6 +13,7 @@ import {
   Briefcase,
   Menu,
   X,
+  ArrowLeftRight,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -26,6 +27,7 @@ const ADMIN_NAV = [
 
 const CLIENT_NAV = [
   { to: '/portal', label: 'Browse Investments', icon: Building2 },
+  { to: '/portal/compare', label: 'Compare', icon: ArrowLeftRight },
   { to: '/portal/my-deals', label: 'My Deal Rooms', icon: Briefcase },
 ];
 
