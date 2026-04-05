@@ -14,26 +14,37 @@ import {
   Menu,
   X,
   ArrowLeftRight,
+  Bell,
+  BarChart3,
+  Activity,
+  UserPlus,
+  FolderCheck,
 } from 'lucide-react';
 import { useState } from 'react';
+import { useUnreadCount } from '@/hooks/useClientExperience';
 
 const ADMIN_NAV = [
   { to: '/portal', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/portal/investments', label: 'Investments', icon: Building2 },
   { to: '/portal/users', label: 'Users', icon: Users },
-  { to: '/portal/documents', label: 'Documents', icon: FileText },
+  { to: '/portal/k1-tracker', label: 'K-1 Tracker', icon: FileText },
+  { to: '/portal/compliance', label: 'Compliance', icon: FolderCheck },
+  { to: '/portal/activity', label: 'Activity Log', icon: Activity },
+  { to: '/portal/analytics', label: 'Analytics', icon: BarChart3 },
   { to: '/portal/irs-codes', label: 'IRS Codes', icon: BookOpen },
 ];
 
 const CLIENT_NAV = [
   { to: '/portal', label: 'Browse Investments', icon: Building2 },
+  { to: '/portal/portfolio', label: 'My Portfolio', icon: Briefcase },
   { to: '/portal/compare', label: 'Compare', icon: ArrowLeftRight },
-  { to: '/portal/my-deals', label: 'My Deal Rooms', icon: Briefcase },
+  { to: '/portal/notifications', label: 'Notifications', icon: Bell },
 ];
 
 const AFFILIATE_NAV = [
-  { to: '/portal', label: 'My Investments', icon: Building2 },
-  { to: '/portal/resources', label: 'Resources', icon: FileText },
+  { to: '/portal', label: 'Browse Deals', icon: Building2 },
+  { to: '/portal/affiliate', label: 'Referrals', icon: UserPlus },
+  { to: '/portal/notifications', label: 'Notifications', icon: Bell },
 ];
 
 export function PortalLayout({ children }: { children: React.ReactNode }) {
@@ -41,6 +52,8 @@ export function PortalLayout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const { data: unreadCount = 0 } = useUnreadCount();
 
   const nav = profile?.role === 'admin' ? ADMIN_NAV
     : profile?.role === 'affiliate' ? AFFILIATE_NAV
@@ -79,6 +92,9 @@ export function PortalLayout({ children }: { children: React.ReactNode }) {
               >
                 <item.icon className="h-4 w-4" />
                 {item.label}
+                {item.label === 'Notifications' && unreadCount > 0 && (
+                  <span className="ml-auto flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">{unreadCount > 9 ? '9+' : unreadCount}</span>
+                )}
               </Link>
             );
           })}

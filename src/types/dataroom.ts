@@ -171,3 +171,161 @@ export const DOC_TYPE_LABELS: Record<DocType, string> = {
   irs_ruling: 'IRS Ruling',
   other: 'Other',
 };
+
+// ============================================
+// PHASE 3: COMPLIANCE & REPORTING
+// ============================================
+
+export type K1Status = 'pending' | 'draft' | 'final' | 'amended' | 'distributed';
+
+export interface K1Document {
+  id: string;
+  investment_id: string;
+  client_id: string;
+  tax_year: number;
+  status: K1Status;
+  file_url: string | null;
+  file_name: string | null;
+  distributed_at: string | null;
+  opened_at: string | null;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export type ComplianceCategory = 'regulatory' | 'tax' | 'legal' | 'reporting' | 'operational';
+export type ComplianceStatus = 'compliant' | 'non_compliant' | 'pending_review' | 'not_applicable';
+export type CompliancePriority = 'low' | 'medium' | 'high' | 'critical';
+
+export interface ComplianceItem {
+  id: string;
+  investment_id: string;
+  title: string;
+  description: string | null;
+  category: ComplianceCategory;
+  status: ComplianceStatus;
+  due_date: string | null;
+  completed_at: string | null;
+  assigned_to: string | null;
+  priority: CompliancePriority;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ActivityLog {
+  id: string;
+  user_id: string | null;
+  action: string;
+  entity_type: string;
+  entity_id: string | null;
+  entity_name: string | null;
+  metadata: Record<string, unknown>;
+  ip_address: string | null;
+  created_at: string;
+}
+
+// ============================================
+// PHASE 4: CLIENT EXPERIENCE
+// ============================================
+
+export type NotificationType = 'info' | 'success' | 'warning' | 'action_required' | 'document' | 'k1' | 'investment';
+
+export interface Notification {
+  id: string;
+  user_id: string;
+  title: string;
+  message: string;
+  type: NotificationType;
+  is_read: boolean;
+  action_url: string | null;
+  metadata: Record<string, unknown>;
+  created_at: string;
+}
+
+export type AccreditationType = 'income' | 'net_worth' | 'entity' | 'professional' | 'other';
+export type RiskTolerance = 'conservative' | 'moderate' | 'aggressive' | 'speculative';
+export type InvestmentHorizon = '1-3_years' | '3-5_years' | '5-10_years' | '10_plus_years';
+
+export interface ClientOnboarding {
+  id: string;
+  client_id: string;
+  step_profile: boolean;
+  step_accreditation: boolean;
+  step_risk_assessment: boolean;
+  step_tax_info: boolean;
+  step_agreements: boolean;
+  accreditation_type: AccreditationType | null;
+  risk_tolerance: RiskTolerance | null;
+  investment_horizon: InvestmentHorizon | null;
+  annual_income_range: string | null;
+  tax_bracket: string | null;
+  state_of_residence: string | null;
+  has_cpa: boolean;
+  cpa_name: string | null;
+  cpa_email: string | null;
+  completed_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+// ============================================
+// PHASE 5: SCALE & INTEGRATE
+// ============================================
+
+export type ReferralStatus = 'pending' | 'contacted' | 'qualified' | 'converted' | 'lost';
+
+export interface AffiliateReferral {
+  id: string;
+  affiliate_id: string;
+  referred_name: string;
+  referred_email: string;
+  referred_phone: string | null;
+  status: ReferralStatus;
+  investment_id: string | null;
+  commission_amount: number | null;
+  commission_paid: boolean;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface PlatformAnalytics {
+  id: string;
+  metric_date: string;
+  metric_type: string;
+  metric_value: number;
+  metadata: Record<string, unknown>;
+  created_at: string;
+}
+
+export const K1_STATUS_LABELS: Record<K1Status, string> = {
+  pending: 'Pending',
+  draft: 'Draft',
+  final: 'Final',
+  amended: 'Amended',
+  distributed: 'Distributed',
+};
+
+export const COMPLIANCE_STATUS_LABELS: Record<ComplianceStatus, string> = {
+  compliant: 'Compliant',
+  non_compliant: 'Non-Compliant',
+  pending_review: 'Pending Review',
+  not_applicable: 'N/A',
+};
+
+export const COMPLIANCE_CATEGORY_LABELS: Record<ComplianceCategory, string> = {
+  regulatory: 'Regulatory',
+  tax: 'Tax',
+  legal: 'Legal',
+  reporting: 'Reporting',
+  operational: 'Operational',
+};
+
+export const REFERRAL_STATUS_LABELS: Record<ReferralStatus, string> = {
+  pending: 'Pending',
+  contacted: 'Contacted',
+  qualified: 'Qualified',
+  converted: 'Converted',
+  lost: 'Lost',
+};
