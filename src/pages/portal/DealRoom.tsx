@@ -11,6 +11,7 @@ import {
 import { useAuth } from '@/lib/auth';
 import { openWatermarkedPdf } from '@/lib/pdf/watermark';
 import { generateAdvisorPacket } from '@/lib/pdf/packetGenerator';
+import { logActivity } from '@/lib/activity';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -333,7 +334,10 @@ export default function DealRoom() {
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => openWatermarkedPdf(doc.file_url, profile?.full_name ?? 'Client')}
+                          onClick={() => {
+                            openWatermarkedPdf(doc.file_url, profile?.full_name ?? 'Client');
+                            logActivity({ action: 'viewed', entityType: 'document', entityId: doc.id, entityName: doc.file_name });
+                          }}
                         >
                           <ExternalLink className="mr-2 h-4 w-4" />
                           View

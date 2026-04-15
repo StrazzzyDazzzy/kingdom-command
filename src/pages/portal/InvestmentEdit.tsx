@@ -347,6 +347,8 @@ export default function InvestmentEdit() {
 
 import type { InvestmentDocument, InvestmentVideo, InvestmentLink, InvestmentAudit } from '@/types/dataroom';
 
+import { broadcastNotification } from '@/lib/activity';
+
 function DocumentManager({ investmentId, documents }: { investmentId: string; documents: InvestmentDocument[] }) {
   const createDoc = useCreateDocument();
   const deleteDoc = useDeleteDocument();
@@ -390,6 +392,16 @@ function DocumentManager({ investmentId, documents }: { investmentId: string; do
           saveExtractedText(docResult.id, text).catch(() => {
             // Text extraction is best-effort; don't block the UI
           });
+        }).catch(() => {});
+      }
+
+      // Notify visible audiences about new document
+      if (isClientVisible) {
+        broadcastNotification({
+          role: 'client',
+          title: 'New Document Available',
+          message: `${result.fileName} has been added to the deal room.`,
+          type: 'document',
         }).catch(() => {});
       }
 
